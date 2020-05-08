@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/Lambda-School-Labs/mission-control2-be/issues"
   },
-  "homepage": "https://github.com/Lambda-School-Labs/mission-control2-be#readme"
+  "homepage": "https://github.com/Lambda-School-Labs/mission-control2-be#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "knex": "^0.21.1"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
 }
