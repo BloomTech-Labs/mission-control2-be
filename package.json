@@ -1,0 +1,19 @@
+{
+  "name": "mission-control-backend",
+  "version": "1.0.0",
+  "description": "Mission control app backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-School-Labs/mission-control2-be.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lambda-School-Labs/mission-control2-be/issues"
+  },
+  "homepage": "https://github.com/Lambda-School-Labs/mission-control2-be#readme"
+}
