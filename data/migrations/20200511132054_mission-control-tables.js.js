@@ -118,12 +118,60 @@ exports.up = function (knex) {
           .inTable('persons')
           .onDelete('RESTRICT')
           .onUpdate('CASCADE')
+        // Private
+        tbl.boolean('private').notNullable()
+        // Created_At
+        tbl.timestamp('created_at').defaultTo(knex.fn.now())
+        // Updated_At
+        tbl.timestamp('updated_at').defaultTo(knex.fn.now())
+      })
+
+      // Roles Table
+      .createTable('roles', (tbl) => {
+        // ID
+        tbl.increments()
+        // Title
+        tbl.string('title', 255).notNullable()
+        // Project Key (FK)
+        tbl
+          .integer('projectKey')
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('projects')
+          .onDelete('RESTRICT')
+          .onUpdate('CASCADE')
+      })
+
+      // Person Roles Table
+      .createTable('person_roles', (tbl) => {
+        // Person Key (FK)
+        tbl
+          .integer('personKey')
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('persons')
+          .onDelete('RESTRICT')
+          .onUpdate('CASCADE')
+        // Roles Key (FK)
+        tbl
+          .integer('rolesKey')
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('roles')
+          .onDelete('RESTRICT')
+          .onUpdate('CASCADE')
       })
   )
 }
 
 exports.down = function (knex) {
   return knex.schema
+    .dropTableIfExists('person_roles')
+    .dropTableIfExists('roles')
+    .dropTableIfExists('notes')
     .dropTableIfExists('repositories')
     .dropTableIfExists('projects')
     .dropTableIfExists('products')
