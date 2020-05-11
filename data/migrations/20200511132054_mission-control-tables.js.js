@@ -22,7 +22,7 @@ exports.up = function (knex) {
         // Name
         tbl.string('name', 255).notNullable()
         // Code Climate Token
-        tbl.string('codeClimateToken', 255).notNullable().unique()
+        tbl.string('codeClimateToken', 255).unique()
         // Created_At
         tbl.timestamp('created_at').defaultTo(knex.fn.now())
         // Updated_At
