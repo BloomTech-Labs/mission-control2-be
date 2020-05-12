@@ -3,12 +3,16 @@ const cors = require('cors')
 const helmet = require('helmet')
 const morgan = require('morgan')
 
+const personsRouter = require('./persons/persons-router')
+
 const server = express()
 
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
 server.use(express.json())
+
+server.use('/api/persons', personsRouter)
 
 server.get('/', (req, res) => {
   res.status(200).json({ api: 'We Up' })

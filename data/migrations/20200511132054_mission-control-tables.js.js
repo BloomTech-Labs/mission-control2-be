@@ -116,7 +116,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('persons')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
         // Private
         tbl.boolean('private').notNullable()
@@ -152,7 +152,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('persons')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
         // Roles Key (FK)
         tbl
