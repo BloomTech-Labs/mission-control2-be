@@ -4,6 +4,8 @@ module.exports = {
   find,
   findById,
   add,
+  update,
+  remove,
 }
 
 function find() {
@@ -15,8 +17,17 @@ function findById(id) {
 }
 
 function add(person) {
-  console.log('*** HELLO ***', person)
   return db('persons')
     .insert(person, 'id')
-    .then((ids) => ({ id: ids[0] }))
+    .then(([id]) => {
+      return this.findById(id)
+    })
+}
+
+function update(id, changes) {
+  return db('persons').where({ id }).update(changes, '*')
+}
+
+function remove(id) {
+  return db('persons').where({ id }).del()
 }

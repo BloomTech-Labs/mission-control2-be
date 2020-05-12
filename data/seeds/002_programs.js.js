@@ -5,7 +5,7 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('programs').insert([
-        { id: 1, name: 'Avengers', codeClimateToken: '' },
+        { name: 'Avengers', codeClimateToken: '' },
       ])
     })
 }
