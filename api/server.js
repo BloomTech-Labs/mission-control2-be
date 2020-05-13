@@ -1,27 +1,24 @@
-const express = require("express");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const cors = require("cors");
 
-//connect server to express
-const server = express();
+const express = require('express')
+const cors = require('cors')
+const helmet = require('helmet')
+const morgan = require('morgan')
 
-//set all routers
-// const orgRouter = require("./Organizations/orgs-router");
+const personsRouter = require('./persons/persons-router')
+const programsRouter = require('./programs/programs-router')
 
-//server middleware
-server.use(helmet());
-server.use(morgan("dev"));
-server.use(cors());
-server.use(express.json());
+const server = express()
 
-//set routers endpoints and connect to routers up top
-// server.use("/api/organizations", orgRouter);
+server.use(cors())
+server.use(helmet())
+server.use(morgan('dev'))
+server.use(express.json())
 
-//these will test server is up and running with a get request
-server.get("/testing", (req, res) => {
-  res.status(200).json({ message: "Your server is up and running" });
-});
+server.use('/api/persons', personsRouter)
+server.use('/api/programs', programsRouter)
 
-//export server
-module.exports = server;
+server.get('/', (req, res) => {
+  res.status(200).json({ api: 'We Up' })
+})
+
+module.exports = server
