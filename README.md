@@ -1,23 +1,15 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm run server** to start the local server
+- **npm run test** to start server using testing environment
 
 ### Backend framework goes here
 
@@ -28,28 +20,27 @@ To get the server running locally:
 - Point Three
 - Point Four
 
-## 2️⃣ Endpoints
+## Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
-
-#### Organization Routes
+#### Programs Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/api/programs`         | owners         | Returns info for all programs.               |
+| GET    | `/api/programs/:id`     | owners         | Returns info for specific program.           |
+| POST   | `/api/programs`         | none           | Creates a new program.                       |
+| PUT    | `/api/programs/:id`     | owners         | Modify an existing program.                  |
+| DELETE | `/api/programs/:id`     | owners         | Delete an existing program.                  |
 
-#### User Routes
+#### Persons Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| GET    | `/api/persons`          | owners              | Returns info for all persons.                      |
+| GET    | `/api/persons/:id`      | owners, supervisors | Returns info for a single person.                  |
+| POST   | `/api/persons`          | none                | Creates a new person.                              |
+| PUT    | `/api/persons/:id`      | owners, supervisors | Modifies an existing persons info                  |
+| DELETE | `/api/persons/:id`      | owners, supervisors | Deletes an eisting person                                                   |
 
 # Data Model
 
