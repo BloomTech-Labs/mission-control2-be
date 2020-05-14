@@ -1,4 +1,4 @@
-const db = require('../../data/db-config')
+const db = require("../../data/db-config.js");
 
 module.exports = {
   find,
@@ -6,28 +6,28 @@ module.exports = {
   add,
   update,
   remove,
-}
+};
 
 function find() {
-  return db('programs')
+  return db("programs");
 }
 
 function findById(id) {
-  return db('programs').where({ id }).first()
+  return db("programs").where({ id }).first();
 }
 
 function add(program) {
-  return db('programs')
-    .insert(program, 'id')
+  return db("programs")
+    .insert(program, "id")
     .then(([id]) => {
-      return this.findById(id)
-    })
+      return this.findById(id);
+    });
 }
 
 function update(id, changes) {
-  return db('programs').where({ id }).update(changes, '*')
+  return db("programs").where({ id }).update(changes, "*");
 }
 
 function remove(id) {
-  return db('programs').where({ id }).del()
+  return db("programs").where({ id }).del();
 }
