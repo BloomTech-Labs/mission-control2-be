@@ -27,6 +27,24 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.get('/email/:email', (req, res) => {
+  const { email } = req.params
+  Data.findByEmail(email)
+    .then((person) => {
+      person
+        ? res.status(200).json(person)
+        : res
+            .status(404)
+            .json({ message: 'Person with specified email not found' })
+    })
+    .catch((error) => {
+      console.log(error)
+      res
+        .status(500)
+        .json({ message: 'Error retrieving the person with specified email' })
+    })
+})
+
 router.post('/', (req, res) => {
   Data.add(req.body)
     .then((persons) => {

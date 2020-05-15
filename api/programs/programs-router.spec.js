@@ -1,6 +1,5 @@
 const request = require('supertest')
 const server = require('../server')
-// const db = require('../../data/db-config')
 
 describe('programs router', () => {
   it('should return 200 OK status', async () => {
