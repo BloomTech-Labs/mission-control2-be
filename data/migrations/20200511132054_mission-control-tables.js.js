@@ -5,6 +5,8 @@ exports.up = function (knex) {
       .createTable('persons', (tbl) => {
         // ID
         tbl.increments()
+        // OktaId
+        tbl.string('oktaId')
         // Name
         tbl.string('name', 255).notNullable()
         // Email
