@@ -169,7 +169,6 @@ exports.up = function (knex) {
         tbl
           .integer('rolesKey')
           .unsigned()
-          .notNullable()
           .references('id')
           .inTable('roles')
           .onDelete('RESTRICT')
@@ -180,6 +179,7 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
+    .dropTableIfExists('project_person_roles')
     .dropTableIfExists('person_roles')
     .dropTableIfExists('roles')
     .dropTableIfExists('notes')

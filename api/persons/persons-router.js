@@ -45,6 +45,29 @@ router.get('/email/:email', (req, res) => {
     })
 })
 
+router.get('/:id/projects', (req, res) => {
+  Data.getPersonFromProject(req.params.id)
+    .then((projects) => {
+      res.status(200).json(projects)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.status(500).json({ message: error })
+    })
+})
+
+router.post('/:id/:project', (req, res) => {
+  const { id, project } = req.params
+  Data.addPersonToProject(id, project)
+    .then((response) => {
+      console.log('***LOOK HERE***', response)
+      res.status(200).json(response)
+    })
+    .catch((error) => {
+      res.status(500).json({ message: error })
+    })
+})
+
 router.post('/', (req, res) => {
   Data.add(req.body)
     .then((persons) => {

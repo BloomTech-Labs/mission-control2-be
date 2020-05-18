@@ -4,6 +4,8 @@ module.exports = {
   find,
   findById,
   findByEmail,
+  getPersonFromProject,
+  addPersonToProject,
   add,
   update,
   remove,
@@ -35,4 +37,35 @@ function update(id, changes) {
 
 function remove(id) {
   return db('persons').where({ id }).del()
+}
+
+function addPersonToProject(person, project) {
+  console.log('***LOOK HERE***', person, project)
+  return db('project_person_roles')
+    .insert({
+      personKey: person,
+      projectKey: project,
+    })
+    .then((res) => {
+      console.log('***FROM THE THEN***', res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+function getPersonFromProject(id) {
+  return db
+    .select(
+      'persons.name as personName',
+      'projects.name as projectName',
+      'products.name as productName',
+      'programs.name as programName'
+    )
+    .from('project_person_roles')
+    .join('persons', 'project_person_roles.personKey', 'persons.id')
+    .join('projects', 'project_person_roles.projectKey', 'projects.id')
+    .join('products', 'projects.productKey', 'products.id')
+    .join('programs', 'products.programKey', 'programs.id')
+    .where('personKey', id)
 }
