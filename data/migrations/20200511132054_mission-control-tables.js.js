@@ -145,8 +145,17 @@ exports.up = function (knex) {
           .onUpdate('CASCADE')
       })
 
-      // Person Roles Table
-      .createTable('person_roles', (tbl) => {
+      // Project Person Roles Table
+      .createTable('project_person_roles', (tbl) => {
+        // Project Key (FK)
+        tbl
+          .integer('projectKey')
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('projects')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE')
         // Person Key (FK)
         tbl
           .integer('personKey')
