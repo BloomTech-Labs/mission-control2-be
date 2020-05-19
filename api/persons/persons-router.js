@@ -45,10 +45,10 @@ router.get('/email/:email', (req, res) => {
     })
 })
 
-router.get('/:id/projects', (req, res) => {
+router.get('/:id/project', (req, res) => {
   Data.getPersonFromProject(req.params.id)
-    .then((projects) => {
-      res.status(200).json(projects)
+    .then((project) => {
+      res.status(200).json(project)
     })
     .catch((error) => {
       console.log(error)

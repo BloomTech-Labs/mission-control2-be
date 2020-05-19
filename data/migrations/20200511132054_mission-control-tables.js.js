@@ -5,10 +5,10 @@ exports.up = function (knex) {
       .createTable('persons', (tbl) => {
         // ID
         tbl.increments()
-        // OktaId
-        tbl.string('oktaId')
         // Name
         tbl.string('name', 255).notNullable()
+        // Password
+        tbl.string('password', 255).notNullable()
         // Email
         tbl.string('email', 255).notNullable().unique()
         // Created_At
