@@ -2,6 +2,7 @@ const db = require('../../data/db-config')
 
 module.exports = {
   find,
+  findBy,
   findById,
   findByEmail,
   getPersonFromProject,
@@ -13,6 +14,10 @@ module.exports = {
 
 function find() {
   return db('persons')
+}
+
+function findBy(filter) {
+  return db('persons').where(filter)
 }
 
 function findByEmail(email) {
