@@ -1,73 +1,125 @@
-const express = require('express')
-const Data = require('./projects-model')
+const express = require("express");
+const Data = require("./projects-model");
+const TagDB = require("../tags/tags-model");
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Data.find()
     .then((projects) => {
-      res.status(200).json(projects)
+      res.status(200).json(projects);
     })
     .catch((error) => {
-      console.log(error)
-      res.status(500).json({ message: 'Error retrieving projects' })
-    })
-})
+      console.log(error);
+      res.status(500).json({ message: "Error retrieving projects" });
+    });
+});
 
-router.get('/:id', (req, res) => {
+router.get("/:id", (req, res) => {
   Data.findById(req.params.id)
     .then((project) => {
       project
         ? res.status(200).json(project)
-        : res.status(404).json({ message: 'Project not found' })
+        : res.status(404).json({ message: "Project not found" });
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       res
         .status(500)
-        .json({ message: 'Error retrieving the specified project' })
-    })
-})
+        .json({ message: "Error retrieving the specified project" });
+    });
+});
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   Data.add(req.body)
     .then((project) => {
-      res.status(201).json(project)
+      res.status(201).json(project);
     })
     .catch((error) => {
-      console.log(error)
-      res.status(500).json({ message: 'Error adding the project' })
-    })
-})
+      console.log(error);
+      res.status(500).json({ message: "Error adding the project" });
+    });
+});
 
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   Data.update(req.params.id, req.body)
     .then((project) => {
       project
         ? res.status(200).json(project)
         : res.status(404).json({
-            message: 'The project with the specified id could not be found',
-          })
+            message: "The project with the specified id could not be found",
+          });
     })
     .catch((error) => {
-      console.log(error)
-      res.status(500).json({ message: 'Error updating the project' })
-    })
-})
+      console.log(error);
+      res.status(500).json({ message: "Error updating the project" });
+    });
+});
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   Data.remove(req.params.id)
     .then((count) => {
       count > 0
-        ? res.status(200).json({ message: 'This project has been removed' })
-        : res.status(404).json({ message: 'This project could not be found' })
+        ? res.status(200).json({ message: "This project has been removed" })
+        : res.status(404).json({ message: "This project could not be found" });
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       res.status(500).json({
-        message: 'Error removing the project',
-      })
-    })
-})
+        message: "Error removing the project",
+      });
+    });
+});
 
-module.exports = router
+// add tag to a project
+router.post("/:id/tags", (req, res) => {
+  const tagId = req.body.id;
+  const id = req.params.id;
+  TagDB.addTagToProject(tagId, req.params.id)
+    .then((result) =>
+      TagDB.findTagsOfProject(id).then((tags) => {
+        res.status(201).json({
+          project_name: tags[0]["project_name"],
+          tag_name: tags.map((item) => item.name),
+        });
+      }),
+    )
+    .catch((err) => {
+      res.status(500).json({ message: "Failed to add tags to this project" });
+    });
+});
+
+// get tags from a project
+router.get("/:id/tags", (req, res) => {
+  const id = req.params.id;
+  TagDB.findTagsOfProject(id)
+    .then((tags) => {
+      res.status(200).json({
+        project_name: tags[0]["project_name"],
+        tag_name: tags.map((item) => item.name),
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Failed to get tags of this project" });
+    });
+});
+
+// delete tag of a project
+router.delete("/:projectId/tags/:tagId", (req, res) => {
+  const projectId = req.params.projectId;
+  const tagId = req.params.tagId;
+  TagDB.removeTagOfProject(tagId, projectId)
+    .then((result) => {
+      console.log(result);
+      res
+        .status(200)
+        .json({ message: "This tag has been removed from this project" });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Failed to remove the tag of this project" });
+    });
+});
+
+module.exports = router;

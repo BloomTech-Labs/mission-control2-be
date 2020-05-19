@@ -3,12 +3,13 @@ const db = require("../../data/db-config.js");
 module.exports = {
   find,
   findById,
+  findByName,
   add,
   update,
   remove,
   findTagsOfProject,
   addTagToProject,
-  // removeTagsOfProject,
+  removeTagOfProject,
 };
 
 function find() {
@@ -17,6 +18,10 @@ function find() {
 
 function findById(id) {
   return db("tags").where({ id }).first();
+}
+
+function findByName(name) {
+  return db("tags").where({ name: name }).first();
 }
 
 function add(tag) {
@@ -43,16 +48,21 @@ function findTagsOfProject(projectKey) {
     .where("p.id", projectKey)
     .join("project_tag as pt", "p.id", "pt.projectKey")
     .join("tags as t", "pt.tagKey", "t.id")
-    .select("p.name as Project Name", "t.name as Tag Name");
+    .select("t.name", "p.name as project_name");
 }
 
-function addTagToProject(tagData, projectKey) {
-  return db("tags")
-    .insert(tagData)
-    .then(([tagId]) => {
-      return db("project_tag").insert({
-        projectKey: projectKey,
-        tagKey: tagId,
-      });
-    });
+function addTagToProject(tagId, projectKey) {
+  return db("project_tag").insert({
+    projectKey: projectKey,
+    tagKey: tagId,
+  });
+}
+
+function removeTagOfProject(tagId, projectKey) {
+  return db("project_tag")
+    .where({
+      projectKey: projectKey,
+      tagKey: tagId,
+    })
+    .del();
 }
