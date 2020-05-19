@@ -24,6 +24,28 @@ router.post('/register', (req, res) => {
     })
 })
 
+router.post('/login', (req, res) => {
+  let { name, password } = req.body
+
+  Data.findBy({ name })
+    .first()
+    .then((person) => {
+      if (person && bcrypt.compareSync(password, person.password)) {
+        const token = generateToken(person)
+
+        res.status(200).json({
+          message: `Welcome back ${person.name}`,
+          token,
+        })
+      } else {
+        res.status(401).json({ message: 'Invalid Credentials' })
+      }
+    })
+    .catch(({ name, code, message, stack }) => {
+      res.status(500).json({ name, code, message, stack })
+    })
+})
+
 function generateToken(person) {
   const payload = {
     subject: person.id,
