@@ -78,15 +78,13 @@ router.delete("/:id", (req, res) => {
 router.post("/:id/tags", validateProjectId, (req, res) => {
   const tagId = req.body.id;
   const id = req.params.id;
-  TagDB.addTagToProject(tagId, req.params.id)
-    .then((result) =>
-      TagDB.findTagsOfProject(id).then((tags) => {
-        res.status(201).json({
-          project_name: tags[0]["project_name"],
-          tag_name: tags.map((item) => item.tag_name),
-        });
-      }),
-    )
+  TagDB.addTagToProject(tagId, id)
+    .then((tags) => {
+      res.status(201).json({
+        project_name: tags[0]["project_name"],
+        tag_name: tags.map((item) => item.tag_name),
+      });
+    })
     .catch((err) => {
       res.status(500).json({ message: "Failed to add tags to this project" });
     });

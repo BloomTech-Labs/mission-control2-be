@@ -52,10 +52,12 @@ function findTagsOfProject(projectKey) {
 }
 
 function addTagToProject(tagId, projectKey) {
-  return db("project_tag").insert({
-    projectKey: projectKey,
-    tagKey: tagId,
-  });
+  return db("project_tag")
+    .insert({
+      projectKey: projectKey,
+      tagKey: tagId,
+    })
+    .then(() => this.findTagsOfProject(projectKey));
 }
 
 function removeTagOfProject(tagId, projectKey) {
