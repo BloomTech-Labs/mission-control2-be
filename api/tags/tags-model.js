@@ -21,7 +21,7 @@ function findById(id) {
 }
 
 function findByName(name) {
-  return db("tags").where({ name: name }).first();
+  return db("tags").where({ name: name }).select("id");
 }
 
 function add(tag) {
@@ -48,7 +48,7 @@ function findTagsOfProject(projectKey) {
     .where("p.id", projectKey)
     .join("project_tag as pt", "p.id", "pt.projectKey")
     .join("tags as t", "pt.tagKey", "t.id")
-    .select("t.name", "p.name as project_name");
+    .select("t.name as tag_name", "p.name as project_name");
 }
 
 function addTagToProject(tagId, projectKey) {

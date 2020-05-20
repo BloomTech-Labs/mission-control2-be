@@ -2,6 +2,9 @@ const express = require("express");
 const Data = require("./projects-model");
 const TagDB = require("../tags/tags-model");
 
+// import validate ProjectId middleware
+const validateProjectId = require("../../middleware/validateProjectId.js");
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -72,7 +75,7 @@ router.delete("/:id", (req, res) => {
 });
 
 // add tag to a project
-router.post("/:id/tags", (req, res) => {
+router.post("/:id/tags", validateProjectId, (req, res) => {
   const tagId = req.body.id;
   const id = req.params.id;
   TagDB.addTagToProject(tagId, req.params.id)
@@ -80,7 +83,7 @@ router.post("/:id/tags", (req, res) => {
       TagDB.findTagsOfProject(id).then((tags) => {
         res.status(201).json({
           project_name: tags[0]["project_name"],
-          tag_name: tags.map((item) => item.name),
+          tag_name: tags.map((item) => item.tag_name),
         });
       }),
     )
@@ -90,13 +93,13 @@ router.post("/:id/tags", (req, res) => {
 });
 
 // get tags from a project
-router.get("/:id/tags", (req, res) => {
+router.get("/:id/tags", validateProjectId, (req, res) => {
   const id = req.params.id;
   TagDB.findTagsOfProject(id)
     .then((tags) => {
       res.status(200).json({
         project_name: tags[0]["project_name"],
-        tag_name: tags.map((item) => item.name),
+        tag_name: tags.map((item) => item.tag_name),
       });
     })
     .catch((err) => {
