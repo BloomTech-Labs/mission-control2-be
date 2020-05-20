@@ -22,6 +22,7 @@ exports.up = function (knex) {
         .inTable("tags")
         .onDelete("RESTRICT")
         .onUpdate("CASCADE");
+      tbl.unique(["projectKey", "tagKey"]);
     });
 };
 
