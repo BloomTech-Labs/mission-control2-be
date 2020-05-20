@@ -5,10 +5,10 @@ exports.up = function (knex) {
       .createTable('persons', (tbl) => {
         // ID
         tbl.increments()
-        // OktaId
-        tbl.string('oktaId')
         // Name
         tbl.string('name', 255).notNullable()
+        // Password
+        tbl.string('password', 255).notNullable()
         // Email
         tbl.string('email', 255).notNullable().unique()
         // Created_At
@@ -145,8 +145,17 @@ exports.up = function (knex) {
           .onUpdate('CASCADE')
       })
 
-      // Person Roles Table
-      .createTable('person_roles', (tbl) => {
+      // Project Person Roles Table
+      .createTable('project_person_roles', (tbl) => {
+        // Project Key (FK)
+        tbl
+          .integer('projectKey')
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('projects')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE')
         // Person Key (FK)
         tbl
           .integer('personKey')
@@ -160,7 +169,6 @@ exports.up = function (knex) {
         tbl
           .integer('rolesKey')
           .unsigned()
-          .notNullable()
           .references('id')
           .inTable('roles')
           .onDelete('RESTRICT')
@@ -171,6 +179,7 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
+    .dropTableIfExists('project_person_roles')
     .dropTableIfExists('person_roles')
     .dropTableIfExists('roles')
     .dropTableIfExists('notes')

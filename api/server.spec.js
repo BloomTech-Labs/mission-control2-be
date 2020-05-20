@@ -11,9 +11,9 @@ describe('server.js', () => {
       const response = await request(server).get('/')
       expect(response.type).toMatch(/json/i)
     })
-    it('should respond with {api:"We up"}', async () => {
+    it('should respond with {api:"We Up"}', async () => {
       const response = await request(server).get('/')
-      expect(response.body.api).toBe('We up')
+      expect(response.body.api).toBe('We Up')
     })
   })
 })

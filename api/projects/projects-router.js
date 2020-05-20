@@ -13,9 +13,10 @@ router.get("/", (req, res) => {
       res.status(200).json(projects);
     })
     .catch((error) => {
-      res.status(500).json({ message: "Error retrieving projects" });
-    });
-});
+      res.status(500).json({ message: 'Error retrieving projects' })
+    })
+})
+
 
 router.get("/:id", (req, res) => {
   Data.findById(req.params.id)
@@ -37,9 +38,9 @@ router.post("/", (req, res) => {
       res.status(201).json(project);
     })
     .catch((error) => {
-      res.status(500).json({ message: "Error adding the project" });
-    });
-});
+      res.status(500).json({ message: 'Error adding the project' })
+    })
+})
 
 router.put("/:id", (req, res) => {
   Data.update(req.params.id, req.body)
@@ -51,9 +52,9 @@ router.put("/:id", (req, res) => {
           });
     })
     .catch((error) => {
-      res.status(500).json({ message: "Error updating the project" });
-    });
-});
+      res.status(500).json({ message: 'Error updating the project' })
+    })
+})
 
 router.delete("/:id", (req, res) => {
   Data.remove(req.params.id)

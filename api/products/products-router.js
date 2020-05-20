@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
       res.status(200).json(products)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error retrieving products' })
     })
 })
@@ -22,7 +21,6 @@ router.get('/:id', (req, res) => {
         : res.status(404).json({ message: 'Product not found' })
     })
     .catch((error) => {
-      console.log(error)
       res
         .status(500)
         .json({ message: 'Error retrieving the specified product' })
@@ -35,7 +33,6 @@ router.post('/', (req, res) => {
       res.status(201).json(product)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error adding the product' })
     })
 })
@@ -50,7 +47,6 @@ router.put('/:id', (req, res) => {
           })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error updating the product' })
     })
 })
@@ -63,7 +59,6 @@ router.delete('/:id', (req, res) => {
         : res.status(404).json({ message: 'This product could not be found' })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({
         message: 'Error removing the product',
       })
