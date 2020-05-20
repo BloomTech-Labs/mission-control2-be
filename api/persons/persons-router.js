@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
       res.status(200).json(persons)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error retrieving persons' })
     })
 })
@@ -22,7 +21,6 @@ router.get('/:id', (req, res) => {
         : res.status(404).json({ message: 'Person not found' })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error retrieving the specified person' })
     })
 })
@@ -38,7 +36,6 @@ router.get('/email/:email', (req, res) => {
             .json({ message: 'Person with specified email not found' })
     })
     .catch((error) => {
-      console.log(error)
       res
         .status(500)
         .json({ message: 'Error retrieving the person with specified email' })
@@ -51,7 +48,6 @@ router.get('/:id/project', (req, res) => {
       res.status(200).json(project)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: error })
     })
 })
@@ -60,7 +56,6 @@ router.post('/:id/:project', (req, res) => {
   const { id, project } = req.params
   Data.addPersonToProject(id, project)
     .then((response) => {
-      console.log('***LOOK HERE***', response)
       res.status(200).json(response)
     })
     .catch((error) => {
@@ -74,7 +69,6 @@ router.post('/', (req, res) => {
       res.status(201).json(persons)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error adding the person' })
     })
 })
@@ -89,7 +83,6 @@ router.put('/:id', (req, res) => {
           })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error updating person' })
     })
 })
@@ -102,8 +95,6 @@ router.delete('/:id', (req, res) => {
         : res.status(404).json({ message: 'This person could not be found' })
     })
     .catch((error) => {
-      // log error to server
-      console.log(error)
       res.status(500).json({
         message: 'Error removing the person',
       })

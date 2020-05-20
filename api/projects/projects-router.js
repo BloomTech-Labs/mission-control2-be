@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
       res.status(200).json(projects)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error retrieving projects' })
     })
 })
@@ -22,7 +21,6 @@ router.get('/:id', (req, res) => {
         : res.status(404).json({ message: 'Project not found' })
     })
     .catch((error) => {
-      console.log(error)
       res
         .status(500)
         .json({ message: 'Error retrieving the specified project' })
@@ -35,7 +33,6 @@ router.post('/', (req, res) => {
       res.status(201).json(project)
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error adding the project' })
     })
 })
@@ -50,7 +47,6 @@ router.put('/:id', (req, res) => {
           })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({ message: 'Error updating the project' })
     })
 })
@@ -63,7 +59,6 @@ router.delete('/:id', (req, res) => {
         : res.status(404).json({ message: 'This project could not be found' })
     })
     .catch((error) => {
-      console.log(error)
       res.status(500).json({
         message: 'Error removing the project',
       })

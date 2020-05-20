@@ -16,6 +16,7 @@ router.post('/register', (req, res) => {
       const token = generateToken(saved)
       res.status(201).json({
         message: `Welcome ${person.name}`,
+        id: person.id,
         token,
       })
     })
@@ -35,6 +36,7 @@ router.post('/login', (req, res) => {
 
         res.status(200).json({
           message: `Welcome back ${person.name}`,
+          id: person.id,
           token,
         })
       } else {

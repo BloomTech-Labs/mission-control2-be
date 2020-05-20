@@ -45,18 +45,10 @@ function remove(id) {
 }
 
 function addPersonToProject(person, project) {
-  console.log('***LOOK HERE***', person, project)
-  return db('project_person_roles')
-    .insert({
-      personKey: person,
-      projectKey: project,
-    })
-    .then((res) => {
-      console.log('***FROM THE THEN***', res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  return db('project_person_roles').insert({
+    personKey: person,
+    projectKey: project,
+  })
 }
 
 function getPersonFromProject(id) {
