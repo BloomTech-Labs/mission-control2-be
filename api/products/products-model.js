@@ -2,14 +2,23 @@ const db = require('../../data/db-config')
 
 module.exports = {
   find,
+  findProjects,
   findById,
   add,
+  addProject,
   update,
   remove,
 }
 
 function find() {
   return db('products')
+}
+
+function findProjects(id) {
+  return db('products')
+    .join('projects', 'products.id', 'projects.productKey')
+    .select('projects.name', 'projects.productKey', 'projects.active')
+    .where('productKey', id)
 }
 
 function findById(id) {
@@ -22,6 +31,10 @@ function add(product) {
     .then(([id]) => {
       return this.findById(id)
     })
+}
+
+function addProject(project, id) {
+  return db('projects').insert({ ...project, productKey: id })
 }
 
 function update(id, changes) {
