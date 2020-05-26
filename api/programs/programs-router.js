@@ -32,7 +32,6 @@ router.get('/:id/products', (req, res) => {
 
   Data.findProducts(id)
     .then((products) => {
-      console.log('***LOOK HERE***', products)
       if (products.length) {
         res.json(products)
       } else {

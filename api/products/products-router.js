@@ -42,7 +42,6 @@ router.get('/:id/projects', (req, res) => {
 
   Data.findProjects(id)
     .then((projects) => {
-      console.log('***LOOK HERE***', projects)
       if (projects.length) {
         res.json(projects)
       } else {

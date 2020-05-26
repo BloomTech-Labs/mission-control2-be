@@ -13,7 +13,6 @@ router.post('/register', (req, res) => {
 
   Data.add(person)
     .then((saved) => {
-      console.log(saved)
       const token = generateToken(saved)
       res.status(201).json({
         message: `Welcome ${person.name}`,

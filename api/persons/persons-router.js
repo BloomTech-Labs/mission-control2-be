@@ -45,6 +45,7 @@ router.get('/email/:email', (req, res) => {
 router.get('/:id/project', (req, res) => {
   Data.getPersonFromProject(req.params.id)
     .then((project) => {
+      console.log(project)
       res.status(200).json(project)
     })
     .catch((error) => {

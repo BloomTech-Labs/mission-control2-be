@@ -20,7 +20,12 @@ function findById(id) {
 function findProducts(id) {
   return db('programs')
     .join('products', 'programs.id', 'products.programKey')
-    .select('products.name', 'products.programKey', 'products.active')
+    .select(
+      'products.id',
+      'products.name',
+      'products.programKey',
+      'products.active'
+    )
     .where('programKey', id)
 }
 
