@@ -37,6 +37,46 @@ router.post('/', (req, res) => {
     })
 })
 
+router.get('/:id/projects', (req, res) => {
+  const { id } = req.params
+
+  Data.findProjects(id)
+    .then((projects) => {
+      console.log('***LOOK HERE***', projects)
+      if (projects.length) {
+        res.json(projects)
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Could not find projects for given product' })
+      }
+    })
+    .catch(({ name, message, error, stack }) => {
+      res.status(500).json({ name, message, error, stack })
+    })
+})
+
+router.post('/:id/projects', (req, res) => {
+  const projectData = req.body
+  const { id } = req.params
+
+  Data.findById(id)
+    .then((product) => {
+      if (product) {
+        Data.addProject(projectData, id).then((project) => {
+          res.status(201).json(project)
+        })
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Could not find product with given id.' })
+      }
+    })
+    .catch(({ name, error, message, stack }) => {
+      res.status(500).json({ name, error, message, stack })
+    })
+})
+
 router.put('/:id', (req, res) => {
   Data.update(req.params.id, req.body)
     .then((product) => {

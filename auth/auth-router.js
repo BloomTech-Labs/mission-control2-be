@@ -13,10 +13,11 @@ router.post('/register', (req, res) => {
 
   Data.add(person)
     .then((saved) => {
+      console.log(saved)
       const token = generateToken(saved)
       res.status(201).json({
         message: `Welcome ${person.name}`,
-        id: person.id,
+        id: saved.id,
         token,
       })
     })
@@ -26,9 +27,9 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  let { name, password } = req.body
+  let { email, password } = req.body
 
-  Data.findBy({ name })
+  Data.findBy({ email })
     .first()
     .then((person) => {
       if (person && bcrypt.compareSync(password, person.password)) {

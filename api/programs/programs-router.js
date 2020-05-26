@@ -27,6 +27,25 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.get('/:id/products', (req, res) => {
+  const { id } = req.params
+
+  Data.findProducts(id)
+    .then((products) => {
+      console.log('***LOOK HERE***', products)
+      if (products.length) {
+        res.json(products)
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Could not find products for given program' })
+      }
+    })
+    .catch(({ name, message, error, stack }) => {
+      res.status(500).json({ name, message, error, stack })
+    })
+})
+
 router.post('/', (req, res) => {
   Data.add(req.body)
     .then((program) => {
