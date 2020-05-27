@@ -17,7 +17,12 @@ function find() {
 function findProjects(id) {
   return db('products')
     .join('projects', 'products.id', 'projects.productKey')
-    .select('projects.name', 'projects.productKey', 'projects.active')
+    .select(
+      'projects.id',
+      'projects.name',
+      'projects.productKey',
+      'projects.active'
+    )
     .where('productKey', id)
 }
 
