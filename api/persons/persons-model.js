@@ -54,10 +54,10 @@ function addPersonToProject(person, project) {
 function getPersonFromProject(id) {
   return db
     .select(
-      'persons.name as personName',
-      'projects.name as projectName',
-      'products.name as productName',
-      'programs.name as programName'
+      'persons.id as personId',
+      'projects.id as projectId',
+      'products.id as productId',
+      'programs.id as programId'
     )
     .from('project_person_roles')
     .join('persons', 'project_person_roles.personKey', 'persons.id')
