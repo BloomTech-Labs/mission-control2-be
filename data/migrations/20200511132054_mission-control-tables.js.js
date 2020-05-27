@@ -44,7 +44,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('programs')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
         // Active
         tbl.boolean('active').notNullable()
@@ -67,7 +67,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('products')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
         // Active
         tbl.boolean('active').notNullable()
@@ -90,7 +90,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('products')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
       })
 
@@ -105,7 +105,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('projects')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
         // Topic
         tbl.string('topic', 255).notNullable()
@@ -141,7 +141,7 @@ exports.up = function (knex) {
           .notNullable()
           .references('id')
           .inTable('projects')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
       })
 
@@ -171,7 +171,7 @@ exports.up = function (knex) {
           .unsigned()
           .references('id')
           .inTable('roles')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE')
       })
   )
