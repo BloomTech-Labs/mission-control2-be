@@ -44,6 +44,11 @@ function remove(id) {
   return db('persons').where({ id }).del()
 }
 
+// function addPersonToProject(person, project) {
+//   console.log('***MODEL***', person, project)
+//   return db('project_person_roles').insert({ ...project, personKey: id })
+// }
+
 function addPersonToProject(person, project) {
   return db('project_person_roles').insert({
     personKey: person,
@@ -57,7 +62,11 @@ function getPersonFromProject(id) {
       'persons.id as personId',
       'projects.id as projectId',
       'products.id as productId',
-      'programs.id as programId'
+      'programs.id as programId',
+      'persons.name as personName',
+      'projects.name as projectName',
+      'products.name as productName',
+      'programs.name as programName'
     )
     .from('project_person_roles')
     .join('persons', 'project_person_roles.personKey', 'persons.id')

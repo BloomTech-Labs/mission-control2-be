@@ -45,7 +45,6 @@ router.get('/email/:email', (req, res) => {
 router.get('/:id/project', (req, res) => {
   Data.getPersonFromProject(req.params.id)
     .then((project) => {
-      console.log(project)
       res.status(200).json(project)
     })
     .catch((error) => {
@@ -57,6 +56,7 @@ router.post('/:id/:project', (req, res) => {
   const { id, project } = req.params
   Data.addPersonToProject(id, project)
     .then((response) => {
+      console.log(response)
       res.status(200).json(response)
     })
     .catch((error) => {
