@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Backend delpoyed at [Heroku](https://mission-control-be.herokuapp.com) <br>
 
 ## Getting started
 
@@ -11,42 +11,66 @@ To get the server running locally:
 - **npm run server** to start the local server
 - **npm run test** to start server using testing environment
 
-### Backend framework goes here
+### Backend framework 
 
-🚫 Why did you choose this framework?
-
-- Point One
-- Point Two
-- Point Three
-- Point Four
+- Node.js
+- Express.js
+- Knex
 
 ## Endpoints
 
 #### Programs Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/api/programs`         | owners         | Returns info for all programs.               |
-| GET    | `/api/programs/:id`     | owners         | Returns info for specific program.           |
-| POST   | `/api/programs`         | none           | Creates a new program.                       |
-| PUT    | `/api/programs/:id`     | owners         | Modify an existing program.                  |
-| DELETE | `/api/programs/:id`     | owners         | Delete an existing program.                  |
+| Method | Endpoint                     | Description                                                  |
+| ------ | ---------------------------- | ------------------------------------------------------------ |
+| GET    | `/api/programs`              | Returns info for all programs.                               |
+| GET    | `/api/programs/:id`          | Returns info for specific program.                           |
+| GET    | `/api/programs/:id/products` | Returns info for products associated with a specific program.|
+| POST   | `/api/programs`              | Creates a new program.                                       |
+| PUT    | `/api/programs/:id`          | Modify an existing program.                                  |
+| DELETE | `/api/programs/:id`          | Delete an existing program.                                  |
 
 #### Persons Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/api/persons`          | owners              | Returns info for all persons.                      |
-| GET    | `/api/persons/:id`      | owners, supervisors | Returns info for a single person.                  |
-| POST   | `/api/persons`          | none                | Creates a new person.                              |
-| PUT    | `/api/persons/:id`      | owners, supervisors | Modifies an existing persons info                  |
-| DELETE | `/api/persons/:id`      | owners, supervisors | Deletes an eisting person                                                   |
+| Method | Endpoint                   | Description                                                      |
+| ------ | -------------------------- | ---------------------------------------------------------------- |
+| GET    | `/api/persons`             | Returns info for all persons.                                    |
+| GET    | `/api/persons/:id`         | Returns info for a single person.                                |
+| GET    | `/api/persons/email/:email`| Returns info for a single person associated with specified email.|
+| GET    | `/api/persons/:id/project` | Returns all projects associated with a single person.            |
+| POST   | `/api/persons/:id/:project`| Adds person to project.                                          |
+| POST   | `/api/persons`             | Creates a new person.                                            |
+| PUT    | `/api/persons/:id`         | Modifies an existing persons info                                |
+| DELETE | `/api/persons/:id`         | Deletes an eisting person                                        | 
+
+#### Products Routes
+
+| Method | Endpoint                     | Description                                           |
+| ------ | ---------------------------- | ------------------------------------------------------|
+| GET    | `/api/products`              | Returns info for all products.                        |
+| GET    | `/api/products/:id`          | Returns info for a single product.                    |
+| GET    | `/api/products/:id/projects` | Returns all projects associated with a single product.|
+| POST   | `/api/products/:id/projects` | Adds a new project to specified product.              |
+| POST   | `/api/products`              | Creates a new product.                                |
+| PUT    | `/api/persons/:id`           | Modifies an existing products info                    |
+| DELETE | `/api/persons/:id`           | Deletes an existing product                           | 
+
+### Projects Routes
+
+| Method | Endpoint                     | Description                                           |
+| ------ | ---------------------------- | ------------------------------------------------------|
+| GET    | `/api/projects`              | Returns info for all projects.                        |
+| GET    | `/api/projects/:id`          | Returns info for a single project.                    |
+| POST   | `/api/projects`              | Creates a new project.                                |
+| PUT    | `/api/projects/:id`          | Modifies an existing projects info                    |
+| DELETE | `/api/projects/:id`          | Deletes an existing project                           | 
+
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+
+#### Programs
 
 ---
 
